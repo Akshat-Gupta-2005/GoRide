@@ -1,0 +1,68 @@
+/* src/Login.css */
+.login-container {
+    text-align: center;
+    padding: 50px;
+    background-color: #007BFF; /* Blue background */
+    color: white; /* White text */
+}
+
+.login-input {
+    margin: 10px;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid white; /* White border */
+}
+
+.login-button {
+    background-color: white; /* White button */
+    color: #007BFF; /* Blue text */
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+}
+
+.signup-link {
+    color: white; /* White link */
+}
+
+.bgcl{
+    background-color: #121212;
+}
+
+.bgc2l{
+    background-color: #1f1f1f;
+}
+
+.bgc3l{
+    background-color: #9e7aff;
+}
+
+
+.tcl{
+    color: #9e7aff;
+}
+
+.tc3l{
+    color: #534a6a;
+}
+
+.fcl2{
+    background-color: #262626;
+    color: #9da4b0;
+
+}
+
+.pbl:hover{
+    border: 1px solid #9d7aff;
+    color: #121212;
+    background-color: #9d7aff;
+    box-shadow: 0 6px 20px #9d7aff5b;
+}
+
+input{
+    background-color: #1f1f1f,
+}
+
+.h100{
+    height: 100vh;
+}

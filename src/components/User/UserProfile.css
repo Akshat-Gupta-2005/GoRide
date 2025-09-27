@@ -1,0 +1,48 @@
+.sz{
+    height: 84.5vh;
+}
+
+.sz2{
+    height: 55vh;
+}
+
+.bp{
+    border: 1px solid #534a6a;
+}
+
+.bgcp{
+    background-color: #121212;
+    /* height: 58vh; */
+}
+.bgcp2{
+    background-color: #1f1f1f;
+}
+.bgcp3{
+    background-color: #9e7aff;
+}
+.bgcp4{
+    background-color: #262626;
+}
+.bgcp5{
+    background-color: #414141;
+}
+
+
+.tcp{
+    color: #9e7aff
+}
+.tcp2{
+    color: #534a6a;
+}
+.tcp3{
+    color: #766996;
+}
+.tcp4{
+    color: #c9b8fa;
+}
+.tcp5{
+    color: #f0ecfc;
+}
+.tcp6{
+    color: #c0bdc8;
+}
