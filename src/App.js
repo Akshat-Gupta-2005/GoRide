@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Routes, Route, useNavigate } from 'react-router-dom';
 import { LoadScript } from '@react-google-maps/api';
-import ProtectedRoute from './components/ProtectedRoute'; 
+import ProtectedRoute from './components/ProtectedRoute';
 import { AuthProvider } from './components/NavigateAuth/AuthContext';
 // Import components
 import NavbarWrapper from './components/HomePage/NavbarWrapper';
@@ -22,7 +22,7 @@ import BookNow from './components/User/BookNow'; // Import the Book Now componen
 import useRides from './ridesData'; // Import the custom hook for rides
 import SignupNavbar from './components/SignUp/SignupNavbar';
 import ForgotPassword from './components/Login/ForgotPassword';
-import Page1 from './components/HomePage/Page1';    
+import Page1 from './components/HomePage/Page1';
 import QuoteSection from './components/HomePage/QuoteSection';
 import TermsAndPolicy from './components/HomePage/TermsAndPolicy';
 import Search from './components/HomePage/Search';
@@ -53,102 +53,95 @@ const App = () => {
     const [from, setFrom] = useState('');
     const [to, setTo] = useState('');
     const [distance, setDistance] = useState(null);
-    const [user, setUser ] = useState(null); // State to hold user information
+    const [user, setUser] = useState(null); // State to hold user information
     const navigate = useNavigate();
     const [searchQuery, setSearchQuery] = useState({ from: '', to: '' });
     // Use the custom hook to manage rides
     const { rides, addRide } = useRides();
-    const userId= localStorage.getItem('id');
+    const userId = localStorage.getItem('id');
     const handleSearch = (fromValue, toValue) => {
         setFrom(fromValue);
         setTo(toValue);
     };
-    const [conn,setConnection]= useState();
+    const [conn, setConnection] = useState();
 
-    const joinChatRoom=async(username,chatroom)=>{
-        try{
-            const conn=HubConnectionBuilder()
-                    .WithUrl("https://localhost:44345")
-                    .configureLogging(LogLevel.Information)
-                    .build();
+    const joinChatRoom = async (username, chatroom) => {
+        try {
+            const conn = HubConnectionBuilder()
+                .WithUrl("https://localhost:44345")
+                .configureLogging(LogLevel.Information)
+                .build();
 
-                    conn.on("JoinSpecificChatRoom",(username,msg)=>{
-                        console.log("msg:",msg)
-                     });
+            conn.on("JoinSpecificChatRoom", (username, msg) => {
+                console.log("msg:", msg)
+            });
 
-                     await conn.start();
-                     await conn.invoke("JoinSpecificChatRoom",{username,chatroom})
+            await conn.start();
+            await conn.invoke("JoinSpecificChatRoom", { username, chatroom })
 
-                     setConnection(conn);
-        }catch(e){
+            setConnection(conn);
+        } catch (e) {
             console.log(e)
         }
     }
 
     // Check for user authentication on app load
     useEffect(() => {
-        const storedUser  = localStorage.getItem('user');
-        if (storedUser ) {
-            setUser (JSON.parse(storedUser )); // Set user state from local storage
+        const storedUser = localStorage.getItem('user');
+        if (storedUser) {
+            setUser(JSON.parse(storedUser)); // Set user state from local storage
         }
     }, []);
 
-  
+
 
     return (
         <LoadScript googleMapsApiKey="AIzaSyBywJINBhCyFlA_8gTd5LMnHc975kEXQtE" libraries={['places']}>
             <div>
-            <Routes>
-    {/* Public routes */}
-    <Route path="/" element={<Home />} />
-    <Route path="/login" element={<Login setUser={setUser} />} />
-    <Route path="/signup" element={<Signup />} />
-    <Route path="/forgot-password" element={<ForgotPassword />} />
-    <Route path="/about" element={<AboutUs />} />
-    <Route path="/contact" element={<ContactUs />} />
-    <Route path="/rides" element={<PopularRides />} />
-    <Route path="/update-password" element={<UpdatePassword/>} />
-    <Route path="/chat" element={<ParentComponent />} />
-
- 
-
-    {/* Protected Routes - Sirf Login Users Ke Liye */}
-    <Route element={<ProtectedRoute />}>
-    <Route path="/search" element={
-                <>
-                    <SearchSection 
-                        onSearch={handleSearch} 
-                        setDistance={setDistance} 
-                        setSearchQuery={setSearchQuery}
-                    />
-                    <PopRides rides={rides} />
-                </>
-            } />
-            <Route path="/your-rides" element={<YourRides />} />
-            <Route path="/rides-driver" element={<PopularRidesDriver />} />
-            <Route path="/contact-driver" element={<ContactDriver />} />
-            <Route path="/about-driver" element={<AboutDriver />} />
-            <Route path="/signup" element={<Signup />} />
-            <Route path="/publish-ride" element={<PublishRide addRide={addRide} />} />
-            <Route path="/upcoming-rides" element={<UpcomingRides />} />
-            <Route path="/book-now" element={<PaymentComponent />} />
-            <Route path="/safety" element={<Safety />} />
-            <Route path="/refer" element={<Refer />} />
-            <Route path="/user-rides" element={<YourRides />} />
-            <Route path="/user-about" element={<AboutUser  />} />
-            <Route path="/user-contact" element={<ContactUser  />} />
-            <Route path="/userprofile" element={<UserProfile />} />
-            <Route path="/driverprofile" element={<DriverProfile />} />
-    </Route>
-</Routes>
+                <Routes>
+                    {/* Public routes */}
+                    <Route path="/" element={<Home />} />
+                    <Route path="/login" element={<Login setUser={setUser} />} />
+                    <Route path="/signup" element={<Signup />} />
+                    <Route path="/forgot-password" element={<ForgotPassword />} />
+                    <Route path="/about" element={<AboutUs />} />
+                    <Route path="/contact" element={<ContactUs />} />
+                    <Route path="/rides" element={<PopularRides />} />
+                    <Route path="/update-password" element={<UpdatePassword />} />
+                    <Route path="/chat" element={<ParentComponent />} />
 
 
 
-                    
-                    
-                    
-        
-                <Footer /> 
+                    {/* Protected Routes - Sirf Login Users Ke Liye */}
+                    <Route element={<ProtectedRoute />}>
+                        <Route path="/search" element={
+                            <>
+                                <SearchSection
+                                    onSearch={handleSearch}
+                                    setDistance={setDistance}
+                                    setSearchQuery={setSearchQuery}
+                                />
+                                <PopRides rides={rides} />
+                            </>
+                        } />
+                        <Route path="/your-rides" element={<YourRides />} />
+                        <Route path="/rides-driver" element={<PopularRidesDriver />} />
+                        <Route path="/contact-driver" element={<ContactDriver />} />
+                        <Route path="/about-driver" element={<AboutDriver />} />
+                        <Route path="/signup" element={<Signup />} />
+                        <Route path="/publish-ride" element={<PublishRide addRide={addRide} />} />
+                        <Route path="/upcoming-rides" element={<UpcomingRides />} />
+                        <Route path="/book-now" element={<PaymentComponent />} />
+                        <Route path="/safety" element={<Safety />} />
+                        <Route path="/refer" element={<Refer />} />
+                        <Route path="/user-rides" element={<YourRides />} />
+                        <Route path="/user-about" element={<AboutUser />} />
+                        <Route path="/user-contact" element={<ContactUser />} />
+                        <Route path="/userprofile" element={<UserProfile />} />
+                        <Route path="/driverprofile" element={<DriverProfile />} />
+                    </Route>
+                </Routes>
+                <Footer />
             </div>
         </LoadScript>
     );
